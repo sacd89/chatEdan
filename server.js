@@ -13,9 +13,10 @@ app.use(express.static('public'));
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
-var Usuario = require('./models/usuarios').Usuario;
+//El orden de carga de los models es importante.
 var Mensaje = require('./models/mensajes').Mensaje;
 var Contacto = require('./models/contactos').Contacto;
+var Usuario = require('./models/usuarios').Usuario;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -44,7 +45,6 @@ app.get('/mensajes/all', function (req, res) {
 
 app.post('/mensaje/create', function (req, res) {
     var mensaje = new Mensaje({
-        nombrePersona: req.body.emisor,
         texto: req.body.text
     });
 
