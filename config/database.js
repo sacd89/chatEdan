@@ -1,4 +1,4 @@
 
 module.exports = {
-    'url' : 'mongodb://localhost/chat'
+    'url' : 'mongodb://localhost/chat-edan'
 }

@@ -13,15 +13,19 @@ app.use(express.static('public'));
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
-//El orden de carga de los models es importante.
-var Mensaje = require('./models/mensajes').Mensaje;
-var Contacto = require('./models/contactos').Contacto;
-var Usuario = require('./models/usuarios').Usuario;
+//El orden de carga es importante, esto solo es la llamada de los Schemas.
+var mensajeSchema = require('./models/mensajes').Mensaje;
+var contactoSchema = require('./models/contactos').Contacto;
+var usuarioSchema = require('./models/usuarios').Usuario;
+
+//Se modela cada variable con su Schema.
+var Mensaje = mongoose.model("Mensaje", mensajeSchema);
+var Contacto = mongoose.model("Contacto", mensajeSchema);
+var Usuario = mongoose.model("Usuario", mensajeSchema);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-
 
 //Servidor Web
 var server = require("http").Server(app);
