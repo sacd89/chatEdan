@@ -1,21 +1,35 @@
 var app = angular.module('appSockets',[]);
 
-app.controller("chatCtrl",function($scope){
+app.controller("chatCtrl", ['$scope', '$http', function ($scope, $http) {
   var socket = io.connect({'forceNew':true});
 
   $scope.mensajes=[];
   $scope.obj = new Object();
 
+//Guarda
   $scope.enviarMensajeNuevo = function(){
       socket.emit('mensajeNuevo', $scope.obj);
   };
 
   socket.on('enviarMensajes', function(data){
-    $scope.mensajes = data;
-    console.log(data);
-    $scope.$apply();
+  //recupera
+     $http({
+            method: 'GET',
+            url: '/mensajes/all'
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.mensajes = response.data;
+            $scope.$apply();
+        }, function errorCallback(response) {
+            console.log("La rego el angular!!! :(");
+            console.log(response);
+        });
   });
-});
+
+  $scope.nuevoMensaje = function () {
+        $scope.mensaje.texto = "";
+    }
+}]);
 
 app.controller('contactosCtrl',function($scope){
   $scope.contacto=

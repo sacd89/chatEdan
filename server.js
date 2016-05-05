@@ -51,7 +51,8 @@ app.get('/mensajes/all', function (req, res) {
 
 app.post('/mensaje/create', function (req, res) {
     var mensaje = new Mensaje({
-        texto: req.body.text
+        texto: req.body.text/*,
+        contacto: contacto._id*/
     });
 
     mensaje.save(function (err, obj) {
@@ -60,7 +61,12 @@ app.post('/mensaje/create', function (req, res) {
 });
 
 app.post('/contacto/agregar', function (req, res) {
-    Usuario.find({"usuario": req.body.usuario}).then(function(data){
+    Usuario.find({
+      "nombre": req.body.nombreContacto,
+      "usuarioContacto": req.body.usuarioContacto,
+      "usuario": usuario._id
+
+    }).then(function(data){
       if(data){
           var contacto = new Contacto(data);
           contacto.save(function (err, obj) {
@@ -102,19 +108,20 @@ app.post('/usuarios/create', function (req, res) {
   });
 });*/
 
-var mensajes = [
+/*var mensajes = [
   {
     id: 1,
     text: "Mensaje 1",
     emisor: "Daniela"
   }
-];
+];*/
 
 io.on('connect', function(socket){
   logger.info("Alguien se ha conectado.");
+  //guarda
   socket.emit('enviarMensajes', mensajes);
+  //recupera
   socket.on('mensajeNuevo', function(data){
-    mensajes.push(data);
     io.sockets.emit('enviarMensajes', mensajes);
   });
 });
