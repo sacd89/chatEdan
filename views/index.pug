@@ -44,11 +44,11 @@ html(ng-app="appSockets")
                     p {{mensaje.text}}
             div(class="chat-box bg-white")
               div(class="input-group")
-                form(class="form-horizontal")
+                form(class="form-horizontal" method="POST" action="mensaje/create")
                   input#emisor(class="form-control border no-shadow no-rounded" type="text" placeholder="Nombre" name="emisor" ng-model="obj.emisor" ng-required="true")
                   input#text(class="form-control border no-shadow no-rounded" type="text" placeholder="Escribe tu mensaje aqui" name="text" ng-model="obj.text" ng-required="true")
                   span(class="input-group-btn")
-                    button(class="btn btn-success no-rounded" ng-click="enviarMensajeNuevo()") Enviar
+                    button(class="btn btn-success no-rounded" type="submit" ng-click="enviarMensajeNuevo()") Enviar
 
 
       script(src="/socket.io/socket.io.js")
