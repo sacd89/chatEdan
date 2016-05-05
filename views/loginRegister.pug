@@ -18,8 +18,6 @@ html
     link(rel="apple-touch-icon-precomposed" href="../public/assets/ico/apple-touch-icon-57-precomposed.png")
 
   body
-
-        <!-- Top content -->
     div(class="top-content")
 
       div(class="inner-bg")
@@ -45,11 +43,11 @@ html
                 div(class="form-bottom")
                   form(role="form" action="" method="post" class="login-form")
                     div(class="form-group")
-                      label(class="sr-only" for="form-username") Email
-                      input(type="text" name="form-username" placeholder="Email..." class="form-username form-control" id="form-username")
+                      label(class="sr-only" for="username") Email
+                      input(type="text" name="username" placeholder="Email..." class="form-username form-control" id="username")
                     div(class="form-group")
-                      label(class="sr-only" for="form-password") Contraseña
-                      input(type="password" name="form-password" placeholder="Contraseña..." class="form-password form-control" id="form-password")
+                      label(class="sr-only" for="password") Contraseña
+                      input(type="password" name="password" placeholder="Contraseña..." class="form-password form-control" id="password")
                     button(type="submit" class="btn") Iniciar Sesión!
             div(class="col-sm-1 middle-border")
             div(class="col-sm-1")
@@ -62,27 +60,28 @@ html
                   div(class="form-top-right")
                     i(class="fa fa-pencil")
                 div(class="form-bottom")
-                  form(role="form" action="" method="post" class="registration-form")
+                  form(role="form" action="/usuarios/create" method="POST" class="registration-form")
                     div(class="form-group")
-                      label(class="sr-only" for="form-name") Nombre
-                      input(type="text" name="form-name" placeholder="Nombre..." class="form-first-name form-control" id="form-first-name")
+                      label(class="sr-only" for="name") Nombre
+                      input(type="text" name="name" placeholder="Nombre..." class="form-first-name form-control" id="name")
                     div(class="form-group")
-                      label(class="sr-only" for="form-email") Email
-                      input(type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email")
+                      label(class="sr-only" for="user") Usuario
+                      input(type="text" name="user" placeholder="Usuario..." class="form-first-name form-control" id="user")
                     div(class="form-group")
-                      label(class="sr-only" for="form-password") Contraseña
-                      input(type="password" name="form-password" placeholder="Contraseña..." class="form-last-name form-control" id="form-password")
+                      label(class="sr-only" for="email") Email
+                      input(type="text" name="email" placeholder="Email..." class="form-email form-control" id="email")
+                    div(class="form-group")
+                      label(class="sr-only" for="password") Contraseña
+                      input(type="password" name="password" placeholder="Contraseña..." class="form-last-name form-control" id="password")
                     button(type="submit" class="btn") Registrarme!
-
-        <!-- Footer -->
-    footer
-      div(class="container")
-        div(class="row")
-          div(class="col-sm-8 col-sm-offset-2")
-            div(class="footer-border")
-            i(class="fa fa-smile-o")
-        <!-- Javascript -->
-    script(src="../public/assets/js/jquery-1.11.1.min.js")
-    script(src="../public/assets/bootstrap/js/bootstrap.min.js")
-    script(src="../public/assets/js/jquery.backstretch.min.js")
-    script(src="../public/assets/js/scripts.js")
+      footer
+        div(class="container")
+          div(class="row")
+            div(class="col-sm-8 col-sm-offset-2")
+              div(class="footer-border")
+              i(class="fa fa-smile-o")
+          <!-- Javascript -->
+      script(src="../public/assets/js/jquery-1.11.1.min.js")
+      script(src="../public/assets/bootstrap/js/bootstrap.min.js")
+      script(src="../public/assets/js/jquery.backstretch.min.js")
+      script(src="../public/assets/js/scripts.js")

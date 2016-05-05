@@ -36,6 +36,10 @@ app.get('/', function (req, res) {
     res.render('index');
 });
 
+app.get('/login', function (req, res) {
+    res.render('loginRegister');
+});
+
 app.get('/mensajes/all', function (req, res) {
     Mensaje.find({}).exec(function (err, mensajes) {
         if (err) {
@@ -55,15 +59,48 @@ app.post('/mensaje/create', function (req, res) {
     });
 });
 
-app.post('/contacto/create', function (req, res) {
-    var contacto = new Contacto({
-        nombre: req.body.usuario
-    });
+app.post('/contacto/agregar', function (req, res) {
+    Usuario.find({"usuario": req.body.usuario}).then(function(data){
+      if(data){
+          var contacto = new Contacto(data);
+          contacto.save(function (err, obj) {
+              console.log("Contacto agregado exitosamente");
+          });
+      }else{
+        console.log("El usuario no existe");
+      }
 
-    contacto.save(function (err, obj) {
-        console.log("Contacto guardado exitosamente");
     });
 });
+
+app.post('/usuarios/create', function (req, res) {
+  var usuario = new Usuario({
+    nombre:req.body.name,
+    usuario: req.body.user,
+    password: req.body.password,
+    correo: req.body.email,
+  });
+      //err tiene los errores que pueden pasar y obj el objeto a guardar.
+      usuario.save(function (err, obj) {
+          if (err) res.redirect("/login", {obj: obj});
+      });
+      res.redirect("/");
+});
+
+/*app.post('/loginSuccess', function (req, res) {
+  Usuario.find({"usuario" : req.body.user}).then(function(data){
+    console.log(Usuario.usuario.password);
+    if(data){
+      if(usuarioSchema.password === req.body.password){
+        res.redirect("/");
+      }else{
+        console.log("Contraseña mal");
+      }
+    }else{
+      console.log("Usuario no existe");
+    }
+  });
+});*/
 
 var mensajes = [
   {
