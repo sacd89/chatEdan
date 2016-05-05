@@ -108,13 +108,13 @@ app.post('/usuarios/create', function (req, res) {
   });
 });*/
 
-/*var mensajes = [
+var mensajes = [
   {
     id: 1,
     text: "Mensaje 1",
     emisor: "Daniela"
   }
-];*/
+];
 
 io.on('connect', function(socket){
   logger.info("Alguien se ha conectado.");
@@ -122,6 +122,7 @@ io.on('connect', function(socket){
   socket.emit('enviarMensajes', mensajes);
   //recupera
   socket.on('mensajeNuevo', function(data){
+    mensajes.push(data);
     io.sockets.emit('enviarMensajes', mensajes);
   });
 });
