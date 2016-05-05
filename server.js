@@ -13,21 +13,24 @@ app.use(express.static('public'));
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
 
-var Usuario = require('./models/usuarios').Usuario;
-var Mensaje = require('./models/mensajes').Mensaje;
-var Contacto = require('./models/contactos').Contacto;
+//El orden de carga es importante, esto solo es la llamada de los Schemas.
+var usuarioSchema = require('./models/usuarios').Usuario;
+var contactoSchema = require('./models/contactos').Contacto;
+var mensajeSchema = require('./models/mensajes').Mensaje;
+
+//Se modela cada variable con su Schema.
+var Usuario = mongoose.model("Usuario", mensajeSchema);
+var Contacto = mongoose.model("Contacto", mensajeSchema);
+var Mensaje = mongoose.model("Mensaje", mensajeSchema);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-
 //Servidor Web
 var server = require("http").Server(app);
 //Servidor de Web Sockets
 var io = require("socket.io")(server);
-
-
 
 app.get('/', function (req, res) {
     res.render('index');
@@ -44,22 +47,21 @@ app.get('/mensajes/all', function (req, res) {
 
 app.post('/mensaje/create', function (req, res) {
     var mensaje = new Mensaje({
-        nombrePersona: req.body.emisor,
         texto: req.body.text
     });
 
     mensaje.save(function (err, obj) {
-        console.log("Guardado exitosamente");
+        console.log("mensaje guardado exitosamente");
     });
 });
 
 app.post('/contacto/create', function (req, res) {
     var contacto = new Contacto({
-        usuario: req.body.usuario
+        nombre: req.body.usuario
     });
 
-    mensaje.save(function (err, obj) {
-        console.log("Guardado exitosamente");
+    contacto.save(function (err, obj) {
+        console.log("Contacto guardado exitosamente");
     });
 });
 
