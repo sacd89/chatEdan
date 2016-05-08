@@ -60,6 +60,15 @@ app.post('/mensaje/create', function (req, res) {
     });
 });
 
+app.get('/contactos/all', function (req, res) {
+    Contacto.find({}).exec(function (err, contactos) {
+        if (err) {
+            throw err;
+        }
+        return res.json(contactos);
+    })
+});
+
 app.post('/contacto/agregar', function (req, res) {
     Usuario.find({
       "nombre": req.body.nombreContacto,
@@ -108,13 +117,9 @@ app.post('/usuarios/create', function (req, res) {
   });
 });*/
 
-var mensajes = [
-  {
-    id: 1,
-    text: "Mensaje 1",
-    emisor: "Daniela"
-  }
-];
+var mensajes = [];
+
+var contactos = [];
 
 io.on('connect', function(socket){
   logger.info("Alguien se ha conectado.");
