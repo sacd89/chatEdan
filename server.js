@@ -65,16 +65,15 @@ app.get('/contactos/all', function (req, res) {
         if (err) {
             throw err;
         }
-        return res.json(contactos);
+        Usuario.populate(contactos, {path: "usuarioContacto"},function(err, libros){
+            return res.json(contactos);
+        });
     })
 });
 
 app.post('contacto/agregar', function (req, res) {
     Usuario.find({
-      "nombre": req.body.nombreContacto,
-      "usuarioContacto": req.body.usuarioContacto/*,
-      "usuario": usuario._id*/
-
+      "usuario": req.body.usuarioContacto
     }).then(function(data){
       if(data){
           var contacto = new Contacto(data);
@@ -84,7 +83,7 @@ app.post('contacto/agregar', function (req, res) {
       }else{
         console.log("El usuario no existe");
       }
-
+      console.log("Si entra al metodo agregar contacto");
     });
 });
 
@@ -126,7 +125,7 @@ io.on('connect', function(socket){
   //Carga datos al iniciar.
   socket.emit('enviarMensajes', mensajes);
   socket.emit('guardarContacto', contactos);
-  
+
   //Escuchas que esperan un dato nuevo
   socket.on('mensajeNuevo', function(data){
     mensajes.push(data);
@@ -136,7 +135,7 @@ io.on('connect', function(socket){
   socket.on('contactoNuevo', function(data){
     contactos.push(data);
     io.sockets.emit('guardarContacto', contactos);
-  });  
+  });
 
 });
 
