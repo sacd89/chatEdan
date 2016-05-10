@@ -69,11 +69,11 @@ app.get('/contactos/all', function (req, res) {
     })
 });
 
-app.post('/contacto/agregar', function (req, res) {
+app.post('contacto/agregar', function (req, res) {
     Usuario.find({
       "nombre": req.body.nombreContacto,
-      "usuarioContacto": req.body.usuarioContacto,
-      "usuario": usuario._id
+      "usuarioContacto": req.body.usuarioContacto/*,
+      "usuario": usuario._id*/
 
     }).then(function(data){
       if(data){
@@ -123,13 +123,21 @@ var contactos = [];
 
 io.on('connect', function(socket){
   logger.info("Alguien se ha conectado.");
-  //guarda
+  //Carga datos al iniciar.
   socket.emit('enviarMensajes', mensajes);
-  //recupera
+  socket.emit('guardarContacto', contactos);
+  
+  //Escuchas que esperan un dato nuevo
   socket.on('mensajeNuevo', function(data){
     mensajes.push(data);
     io.sockets.emit('enviarMensajes', mensajes);
   });
+
+  socket.on('contactoNuevo', function(data){
+    contactos.push(data);
+    io.sockets.emit('guardarContacto', contactos);
+  });  
+
 });
 
 server.listen(8080, function(){

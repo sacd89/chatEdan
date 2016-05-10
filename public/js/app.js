@@ -31,7 +31,7 @@ app.controller("chatCtrl", ['$scope', '$http', function ($scope, $http) {
     }
 }]);
 
-app.controller('contactosCtrl',function($scope){
+/*app.controller('contactosCtrl',function($scope){
   $scope.contacto=
                     {
                       nombre: "Popo",
@@ -40,4 +40,33 @@ app.controller('contactosCtrl',function($scope){
                       imagen:"http://bootdey.com/img/Content/user_1.jpg"
                     }
                   ;
-});
+});*/
+
+app.controller("contactosCtrl", ['$scope', '$http', function ($scope, $http) {
+  var socket = io.connect({'forceNew':true});
+
+  $scope.contactos=[];
+  $scope.obj = new Object();
+
+//Guarda
+  $scope.guardarContactoNuevo = function(){
+      socket.emit('contactoNuevo', $scope.obj);
+  };
+
+  socket.on('guardarContacto', function(data){
+  //recupera
+
+
+    $http({
+            method: 'GET',
+            url: '/contactos/all'
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.contactos = response.data;
+            $scope.$apply();
+        }, function errorCallback(response) {
+            console.log("La rego el angular!!! :(");
+            console.log(response);
+        });
+  });
+}]);
