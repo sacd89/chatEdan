@@ -8,7 +8,7 @@ app.controller("chatCtrl", ['$scope', '$http', function ($scope, $http) {
 
 //Guarda
   $scope.enviarMensajeNuevo = function(){
-      socket.emit('mensajeNuevo', $scope.obj);
+      socket.emit('mensajeNuevo');
   };
 
   socket.on('enviarMensajes', function(data){
@@ -46,11 +46,11 @@ app.controller("contactosCtrl", ['$scope', '$http', function ($scope, $http) {
   var socket = io.connect({'forceNew':true});
 
   $scope.contactos=[];
-  $scope.obj = new Object();
+  $scope.obj1 = new Object();
 
 //Guarda
   $scope.guardarContactoNuevo = function(){
-      socket.emit('contactoNuevo', $scope.obj);
+      socket.emit('contactoNuevo', $scope.obj1);
   };
 
   socket.on('guardarContacto', function(data){
