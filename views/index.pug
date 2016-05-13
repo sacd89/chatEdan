@@ -3,23 +3,26 @@ html(ng-app="app")
     head
         title= title
         link(rel="stylesheet", href="public/css/bootstrap.min.css")
+        link(rel="stylesheet", href="public/css/style.css")
 
     body
         div(ng-controller="chatController")
             h1  El mejor chat del mundo
-            div.col-md-12.well(ng-show="messages.length > 0")
-                div.form-group(ng-repeat="mensaje in messages")
-                        p
-                            strong {{mensaje.nombrePersona}} dice:
-                        | {{mensaje.texto}}
-            div.container
+            div.col-md-9.well.pull-right.chat-section(ng-show="messages.length > 0")
+                ul.chat
+                    li.left.clearfix(ng-repeat="mensaje in messages") 
+                        div.chat-body.clearfix()
+                            p
+                                strong {{mensaje.nombrePersona}} dice:
+                            | {{mensaje.texto}}
+            div.well.col-md-9.pull-right.chat-box
                 form.form-horizontal(method="POST" action="#")
                     div.col-md-8.form-group
                         label(for="nombrePersona") Nombre
                         input#nombrePersona.form-control(type="text" ng-model="mensaje.nombrePersona" name="nombrePersona" ng-required="true")
                     div.col-md-8.form-group
                         label(for="texto") Mensaje
-                        input#texto.form-control(type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
+                        textarea#texto.form-control(rows="4" type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
                     div.col-md-12
                         button.btn.btn-default(type="button" ng-disabled="!(mensaje.texto && mensaje.nombrePersona)" ng-click="enviarMensajeNuevo()") Enviar
 
@@ -28,3 +31,5 @@ html(ng-app="app")
         script(src="https://cdn.socket.io/socket.io-1.4.5.js")
         script(type="text/javascript", src="public/js/jquery-1.12.3.min.js")
         script(type="text/javascript", src="public/js/bootstrap.min.js")
+        script(src="public/assets/js/jquery.backstretch.min.js")
+        script(src="public/assets/js/scripts.js")
