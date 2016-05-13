@@ -1,57 +1,30 @@
 doctype html
-html(ng-app="appSockets")
+html(ng-app="app")
     head
-      meta(charset="utf-8")
-      title EDAN MESSENGER
-      link(rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
-      link(rel="stylesheet" type="text/css" href="css/style.css")
+        title= title
+        link(rel="stylesheet", href="public/css/bootstrap.min.css")
 
     body
-      link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet")
-      div(class="container bootstrap snippet")
-        div(class="row")
-          div(class="col-md-4 bg-white" ng-controller="contactosCtrl")
-            button(type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal") Agregar Contacto
-              <!-- Modal -->
-            div(id="myModal" class="modal fade" role="dialog")
-              div(class="modal-dialog")
-                div(class="modal-content")
-                  div(class="modal-header")
-                    button(type="button" class="close" data-dismiss="modal") &times;
-                    h4(class="modal-title") Agregar Contacto
-                  div(class="modal-body")
-                    form(method="POST" action="/contacto/agregar")
-                      div(class="form-group")
-                        label(for="exampleInputEmail1") Usuario
-                        input#usuario(type="text" class="form-control" name="usuarioContacto" placeholder="Usuario" ng-model="obj.usuario")
-                      button(type="submit" class="btn btn-default" data-dismiss="modal") Agregar
-            ul(class="friend-list")
-              li(class="active bounceInDown" ng-repeat="contacto in contactos")
-                a(class="clearfix" href="#")
-                  div(class="friend-name")
-                    strong {{contacto.nombre}}
-          div(class="col-md-8 bg-white" ng-controller="chatCtrl")
-            div(class="chat-message" ng-repeat="mensaje in mensajes")
-              ul(class="chat" id="messages")
-                li(class="right clearfix")
-                  span(class="chat-img pull-right")
-                    img(src="http://bootdey.com/img/Content/user_1.jpg" alt="User Avatar")
-                  div(class="chat-body clearfix")
-                    div(class="header")
-                      strong(class="primary-font") {{mensaje.emisor}}
-                      small(class="pull-right text-muted i.fa fa-clock-o") 13 mins ago
-                    p {{mensaje.texto}}
-            div(class="chat-box bg-white")
-              div(class="input-group")
-                form(class="form-horizontal" method="POST" action="mensaje/create")
-                  input#emisor(class="form-control border no-shadow no-rounded" type="text" placeholder="Nombre" name="emisor" ng-model="obj.emisor" ng-required="true")
-                  input#text(class="form-control border no-shadow no-rounded" type="text" placeholder="Escribe tu mensaje aqui" name="text" ng-model="obj.text" ng-required="true")
-                  span(class="input-group-btn")
-                    button(class="btn btn-success no-rounded" type="submit" ng-click="enviarMensajeNuevo()") Enviar
+        div(ng-controller="chatController")
+            h1  El mejor chat del mundo
+            div.col-md-12.well(ng-show="messages.length > 0")
+                div.form-group(ng-repeat="mensaje in messages")
+                        p
+                            strong {{mensaje.nombrePersona}} dice:
+                        | {{mensaje.texto}}
+            div.container
+                form.form-horizontal(method="POST" action="#")
+                    div.col-md-8.form-group
+                        label(for="nombrePersona") Nombre
+                        input#nombrePersona.form-control(type="text" ng-model="mensaje.nombrePersona" name="nombrePersona" ng-required="true")
+                    div.col-md-8.form-group
+                        label(for="texto") Mensaje
+                        input#texto.form-control(type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
+                    div.col-md-12
+                        button.btn.btn-default(type="button" ng-disabled="!(mensaje.texto && mensaje.nombrePersona)" ng-click="enviarMensajeNuevo()") Enviar
 
-
-      script(src="/socket.io/socket.io.js")
-      script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js")
-      script(type="text/javascript" src="js/app.js")
-      script(type="text/javascript", src="js/jquery-1.12.3.min.js")
-      script(type="text/javascript", src="js/bootstrap.min.js")
+        script(type="text/javascript" src="public/js/angular.min.js")
+        script(type="text/javascript" src="public/js/app.js")
+        script(src="https://cdn.socket.io/socket.io-1.4.5.js")
+        script(type="text/javascript", src="public/js/jquery-1.12.3.min.js")
+        script(type="text/javascript", src="public/js/bootstrap.min.js")

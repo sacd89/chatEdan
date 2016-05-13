@@ -1,72 +1,21 @@
-var app = angular.module('appSockets',[]);
+var app = angular.module('app', []);
 
-app.controller("chatCtrl", ['$scope', '$http', function ($scope, $http) {
-  var socket = io.connect({'forceNew':true});
+app.controller('chatController', ['$scope', '$http', function ($scope, $http) {
 
-  $scope.mensajes=[];
-  $scope.obj = new Object();
+    var socket = io.connect({'forceNew': true});
+    $scope.messages = $scope.messages || [];
+    $scope.mensaje = new Object();
 
-//Guarda
-  $scope.enviarMensajeNuevo = function(){
-      socket.emit('mensajeNuevo');
-  };
+    socket.on('sendMessages', function (data) {
+        $scope.messages = data.emitted.fulfill[0];
+        $scope.$apply();
+    });
 
-  socket.on('enviarMensajes', function(data){
-  //recupera
-     $http({
-            method: 'GET',
-            url: '/mensajes/all'
-        }).then(function successCallback(response) {
-            console.log(response.data);
-            $scope.mensajes = response.data;
-            $scope.$apply();
-        }, function errorCallback(response) {
-            console.log("La rego el angular!!! :(");
-            console.log(response);
-        });
-  });
-
-  $scope.nuevoMensaje = function () {
-        $scope.mensaje.texto = "";
+    socket.on('sendMessage', function (data) {
+        $scope.messages.push(data);
+        $scope.$apply();
+    });
+    $scope.enviarMensajeNuevo = function () {
+        socket.emit('newMessage', $scope.mensaje);
     }
-}]);
-
-/*app.controller('contactosCtrl',function($scope){
-  $scope.contacto=
-                    {
-                      nombre: "Popo",
-                      ultimoMensaje: "asdxfcgvjhmggndfb",
-                      fecha: new Date('2016','04','14'),
-                      imagen:"http://bootdey.com/img/Content/user_1.jpg"
-                    }
-                  ;
-});*/
-
-app.controller("contactosCtrl", ['$scope', '$http', function ($scope, $http) {
-  var socket = io.connect({'forceNew':true});
-
-  $scope.contactos=[];
-  $scope.obj1 = new Object();
-
-//Guarda
-  $scope.guardarContactoNuevo = function(){
-      socket.emit('contactoNuevo', $scope.obj1);
-  };
-
-  socket.on('guardarContacto', function(data){
-  //recupera
-
-
-    $http({
-            method: 'GET',
-            url: '/contactos/all'
-        }).then(function successCallback(response) {
-            console.log(response.data);
-            $scope.contactos = response.data;
-            $scope.$apply();
-        }, function errorCallback(response) {
-            console.log("La rego el angular!!! :(");
-            console.log(response);
-        });
-  });
 }]);

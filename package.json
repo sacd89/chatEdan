@@ -9,12 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.0",
-    "cookie-parser": "^1.4.1",
-    "express": "^4.13.4",
+    "body-parser": "~1.15.1",
+    "cookie-parser": "~1.4.1",
+    "express": "~4.13.4",
     "log4js": "^0.6.35",
-    "mongoose": "^4.4.14",
-    "pug": "^2.0.0-alpha6",
-    "socket.io": "^1.4.5"
+    "mongoose": "~4.4.16",
+    "pug": "~2.0.0-alpha7",
+    "socket.io": "~1.4.6"
   }
 }
