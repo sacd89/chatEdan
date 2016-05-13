@@ -31,6 +31,10 @@ var server = require('http').Server(app);
 var io = require("socket.io")(server);
 
 app.get('/', function (req, res) {
+    res.render('loginRegister');
+});
+
+app.get('/home', function (req, res) {
     res.render('index');
 });
 
@@ -54,9 +58,9 @@ app.post('/usuarios/create', function (req, res) {
   });
       //err tiene los errores que pueden pasar y obj el objeto a guardar.
       usuario.save(function (err, obj) {
-          if (err) res.redirect("/login", {obj: obj});
+          if (err) res.redirect("/", {obj: obj});
       });
-      res.redirect("/");
+      res.redirect("/home");
 });
 
 var getMessages = Mensaje.find({}).then(function successCallback(success) {
