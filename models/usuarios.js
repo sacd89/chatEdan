@@ -4,8 +4,17 @@ var Schema = mongoose.Schema;
 var usuarioSchema = new Schema({
     nombre:String,
     usuario: String,
-    password: String,
-    correo: String,
+    local: {
+        email: {type: String},
+        password: {
+            type: String
+            // , validate: {
+            //     validator: function (p) {
+            //         return this.confirmarPassword === p;
+            //     }, message: "Las contraseñas no son iguales"
+            // }
+        }
+    }
 });
 //El mongose agarra el nombre en singular y lo transforma en plural y quita el capital para agregarlo a mongo
-var Usuario = mongoose.model("Usuario", usuarioSchema);
+module.exports = mongoose.model("Usuario", usuarioSchema);
