@@ -12,7 +12,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('view engine', 'jade');
 app.use("/public", express.static(__dirname + "/public"));
 app.use(session({
     secret: "d41d8cd98f00b204e9800998ecf8427e", //Es un hash que identifica  nuestra aplicacion de otras aplicaciones express
