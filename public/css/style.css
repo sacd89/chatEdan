@@ -188,7 +188,7 @@ img {
 }
 
 textarea#texto{  
-  resize:none;
+  resize: none;
   width: 100%;
 }
 
@@ -241,13 +241,13 @@ border-radius: 3px;
   height: 49.2em;
 }
 
-.list-group > li{
-  margin: .5em 0;
-}
-
 #contenedor-contactos{
   overflow: auto;
   height: 40em;
+}
+
+.name-user{
+  font-size: 25px;
 }
 
 ::-webkit-scrollbar {
