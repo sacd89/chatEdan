@@ -106,6 +106,12 @@ img {
   padding-bottom: 1em;
 }
 
+.chat-text{
+
+  width: 100%;
+  word-break: break-all;
+}
+
 .chat li.left .chat-body {
   margin-left: 1%;
   background-color: #fff;
@@ -190,6 +196,7 @@ img {
 textarea#texto{  
   resize: none;
   width: 100%;
+  margin-bottom: 1.3em;
 }
 
 a:hover, a:active, a:focus {
