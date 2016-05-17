@@ -1,0 +1,63 @@
+doctype html
+html(ng-app="app")
+    head
+        title= title
+        link(rel="stylesheet", href="public/css/bootstrap.min.css")
+        link(rel="stylesheet", href="public/css/style.css")
+
+    body
+        div(ng-controller="chatController", ng-init="init('#{user._id}', '#{user.nombre}')")
+            div.col-md-2.well.pull-left
+                button(type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"
+                ng-click="getUsuarios()") Agregar Contacto
+                <!-- Modal -->
+                div(class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
+                  div(class="modal-dialog" role="document")
+                    div(class="modal-content")
+                      div(class="modal-header")
+                        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                          span(aria-hidden="true") Cerrar
+                        h4(class="modal-title" id="myModalLabel") Usuarios Disponibles
+                      div(class="modal-body")
+                        table(class="table table-striped")
+                          thead
+                            tr
+                              th Nombre
+                              th Usuario
+                              th
+                          tbody
+                            tr(ng-repeat="usuario in usuarios")
+                              td {{usuario.nombre}}
+                              td {{usuario.usuario}}
+                              td
+                                button(class="mdl-button" type="button" ng-click="agregarContacto(usuario._id)") Agregar
+                br
+                br
+                ul(class="list-group")
+                  li(class="list-group-item" ng-repeat="contacto in contactos")
+                    a(ng-click="getMensajesChat(contacto._id)") {{contacto.nombre}}
+            div.col-md-9.well.pull-right.chat-section(ng-show="messages.length > 0")
+                ul.chat
+                    li.left.clearfix(ng-repeat="mensaje in chat.mensajes")
+                        div.chat-body.clearfix()
+                            p
+                                strong {{mensaje.nombrePersona}} dice:
+                            | {{mensaje.texto}}
+            div.well.col-md-9.pull-right.chat-box
+                form.form-horizontal(method="POST" action="#")
+                    div.col-md-8.form-group
+                        label(for="nombrePersona") #{user.nombre}
+                    div.col-md-8.form-group
+                        label(for="texto") Mensaje
+                        textarea#texto.form-control(rows="4" type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
+                    div.col-md-12
+                        button.btn.btn-default(type="button" ng-disabled="!(mensaje.texto)" ng-click="enviarMensajeNuevo()") Enviar
+
+        script(type="text/javascript" src="public/js/angular.min.js")
+        script(type="text/javascript" src="public/js/app.js")
+        script(type="text/javascript" src="public/js/socket.io-client-master/socket.io.js")
+        script(type="text/javascript", src="public/js/jquery-1.12.3.min.js")
+        script(type="text/javascript", src="public/js/bootstrap.min.js")
+        script(type="text/javascript" src="public/js/animaciones.js")
+        script(src="public/assets/js/jquery.backstretch.min.js")
+        script(src="public/assets/js/scripts.js")
