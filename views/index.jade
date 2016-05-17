@@ -45,7 +45,8 @@ html(ng-app="app")
                             div.chat-body.clearfix()
                                 p
                                     strong {{mensaje.nombrePersona}} dice:
-                                | {{mensaje.texto}}
+                                |   
+                                div.chat-text {{mensaje.texto}}
                 div.transparent.well.col-md-10.pull-right.chat-box
                     form.form-horizontal(method="POST" action="#")
                         div.col-md-8.form-group.name-user
