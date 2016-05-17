@@ -14,7 +14,8 @@ var usuarioSchema = new Schema({
             //     }, message: "Las contraseñas no son iguales"
             // }
         }
-    }
+    },
+    contactos: {type: Array, "default": []}
 });
 //El mongose agarra el nombre en singular y lo transforma en plural y quita el capital para agregarlo a mongo
 module.exports = mongoose.model("Usuario", usuarioSchema);
