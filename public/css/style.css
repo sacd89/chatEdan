@@ -95,8 +95,7 @@ small, .small {
 
 .chat-section{
   overflow: auto; 
-  height: 30em;
-  margin-right: 5%;
+  height: 27em;
 }
 
 img {
@@ -104,11 +103,11 @@ img {
 }
 
 .chat-body {
-  padding-bottom: 20px;
+  padding-bottom: 1em;
 }
 
 .chat li.left .chat-body {
-  margin-left: 70px;
+  margin-left: 1%;
   background-color: #fff;
 }
 
@@ -168,11 +167,11 @@ img {
 }
 
 .chat li {
-  margin: 15px 0;
+  margin: 1em 0;
 }
 
 .chat li.right .chat-body {
-  margin-right: 70px;
+  margin-right: 1%;
   background-color: #fff;
 }
 
@@ -182,7 +181,6 @@ img {
   -moz-transition: all .5s ease;
   -ms-transition: all .5s ease;
   -o-transition: all .5s ease;
-  margin-right: 5%;
 }
 
 .primary-font {
@@ -215,4 +213,73 @@ button.btn {
     text-shadow: none;
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+#contenedor{
+  padding: 0 1%;
+}
+
+#contenedor-chat{
+  margin-left: 1%;
+}
+
+.transparent{
+ background: rgba(255, 255, 255, .60);  
+}
+
+#add-contacto{
+  width: 100%;
+}
+
+.btn-lista{
+height: 2em !important;
+border:none;
+border-radius: 3px;
+}
+
+#list-contactos{
+  height: 49.2em;
+}
+
+.list-group > li{
+  margin: .5em 0;
+}
+
+#contenedor-contactos{
+  overflow: auto;
+  height: 40em;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #17666a;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0)
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: rgba(0,0,0,0)
+}
+::-webkit-scrollbar-track:active {
+  background: rgba(0,0,0,0);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
