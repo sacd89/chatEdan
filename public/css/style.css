@@ -109,6 +109,7 @@ img {
 .chat-text{
 
   width: 100%;
+  word-break: break-all;
 }
 
 .chat li.left .chat-body {
