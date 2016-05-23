@@ -48,13 +48,16 @@ html(ng-app="app")
                                 |   
                                 div.chat-text {{mensaje.texto}}
                 div.transparent.well.col-md-10.pull-right.chat-box
-                    form.form-horizontal(method="POST" action="#")
-                        div.col-md-8.form-group.name-user
-                            label(for="nombrePersona") ¡Hola #{user.nombre}!
-                        div.col-md-12
-                            textarea#texto.form-control.pull-right(placeholder="Escribe un mensaje aqui" rows="4" type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
-                        div.col-md-12
-                            button.btn.btn-default.pull-right(type="button" ng-disabled="!(mensaje.texto)" ng-click="enviarMensajeNuevo()") Enviar
+                  form.form-horizontal(method="POST" action="#")
+                      div.col-md-8.form-group.name-user
+                          label(for="nombrePersona") ¡Hola #{user.nombre}!
+                      div.col-md-12
+                          textarea#texto.form-control.pull-right(placeholder="Escribe un mensaje aqui" rows="4" type="text" ng-model="mensaje.texto" name="texto" ng-required="true")
+                      div.col-md-11
+                          button.btn.btn-default.pull-right(type="button" ng-disabled="!(mensaje.texto)" ng-click="enviarMensajeNuevo()") Enviar
+                    form.div-salida(method="GET" action="/logout")
+                      button.btn.btn-default.pull-right(type="submit")
+                        img(src="public/assets/ico/logout.png")
 
         script(type="text/javascript" src="public/js/angular.min.js")
         script(type="text/javascript" src="public/js/app.js")
